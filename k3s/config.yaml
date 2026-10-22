@@ -1,0 +1,7 @@
+# /etc/rancher/k3s/config.yaml
+# Disabled because Coder is exposed on a NodePort and ports 80/443 are not needed.
+# Note: disable ServiceLB BEFORE any LoadBalancer services exist, or their
+# deletion can hang on a finalizer (see docs/troubleshooting.md, entry 2).
+disable:
+  - traefik
+  - servicelb

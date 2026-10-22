@@ -1,0 +1,17 @@
+# Replace <SERVER_LAN_IP> with the server's LAN address.
+# The access URL must be reachable from the workspace pods, because the
+# agent inside each workspace connects back to it.
+coder:
+  env:
+    - name: CODER_PG_CONNECTION_URL
+      valueFrom:
+        secretKeyRef:
+          name: coder-db-url
+          key: url
+    - name: CODER_ACCESS_URL
+      value: "http://<SERVER_LAN_IP>:30080"
+    - name: CODER_OAUTH2_GITHUB_DEFAULT_PROVIDER_ENABLE
+      value: "false"
+  service:
+    type: NodePort
+    httpNodePort: "30080"
